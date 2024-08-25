@@ -150,6 +150,7 @@
 }
 
 .input-field {
+    border: none;
   border-radius: 4px;
   background-color: #f3f4f6;
   font-weight: 400;
@@ -172,6 +173,7 @@
 }
 
 .phone-field {
+    border: none;
   border-radius: 4px;
   background-color: #f3f4f6;
   font-weight: 400;
@@ -204,6 +206,7 @@
 }
 
 .email-field {
+    border: none;
   border-radius: 4px;
   background-color: #f3f4f6;
   font-weight: 400;
@@ -274,6 +277,10 @@
   font-weight: 400;
   line-height: 2;
 }
+input[type="checkbox"]:checked + .checkbox::after {
+  display: block;
+  background-color: #1e264c; 
+}
 
 @media (max-width: 991px) {
   .terms-checkbox {
@@ -292,13 +299,25 @@
 .checkbox {
   border-radius: 2px;
   background-color: #fff;
-  display: flex;
+  display: inline-block;
   width: 16px;
   height: 16px;
   margin: auto 0;
   border: 1px solid #565e6c;
+  position: relative;
 }
-
+.checkbox::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 1px;
+  width: 3px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
 .terms-text {
   flex-grow: 1;
   width: 457px;
@@ -312,6 +331,7 @@
 }
 
 .submit-button {
+  cursor: pointer;
   transform: rotate(2.4492937051703357e-16rad);
   border-radius: 4px;
   background-color: #1e264c;

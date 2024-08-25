@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios"; // Import axios
-import { ToastContainer, toast } from "react-toastify"; // Import Toastify
-import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import "../../styles/SignUp.css";
 import Landing from "../../assets/ZH.png";
 import Logo from "../../assets/zhlogo.png";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   // State for form inputs
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -35,6 +38,14 @@ const SignUp = () => {
     return Object.keys(newErrors).length === 0; // Returns true if no errors
   };
 
+  const handleTermsChange = (e) => {
+    setTermsAccepted(e.target.checked);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      termsAccepted: undefined,
+    }));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -52,7 +63,10 @@ const SignUp = () => {
       });
 
       // Handle success
-      toast.success("Signup successful! Please check your email.");
+      toast.success("Signup successful! Please proceed to login.");
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000); //3seconds
     } catch (error) {
       // Handle error
       if (error.response && error.response.data) {
@@ -65,7 +79,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <ToastContainer /> {/* Add ToastContainer for notifications */}
+      <ToastContainer />
       <div className="sign-up-container">
         <div className="content-wrapper">
           <div className="image-column">
@@ -190,7 +204,7 @@ const SignUp = () => {
                       id="termsCheckbox"
                       className="visually-hidden"
                       checked={termsAccepted}
-                      onChange={(e) => setTermsAccepted(e.target.checked)}
+                      onChange={handleTermsChange}
                     />
                     <label htmlFor="termsCheckbox" className="checkbox"></label>
                     <span className="terms-text">
