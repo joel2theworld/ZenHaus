@@ -39,7 +39,7 @@ export const signupHandler = async (req, res) => {
     const mailOptions = {
       to: user.email,
       from: config.emailUser,
-      subject: 'Welcome to ZenHausser!',
+      subject: 'Welcome to ZenHaus!',
       html: `
         <html>
           <body>
@@ -48,7 +48,7 @@ export const signupHandler = async (req, res) => {
             <p>Please head over to your profile to create a new property listing.</p>
             <br>
             <p>Best Regards,<br>
-            The ZenHausser Team</p>
+            The ZenHaus Team</p>
           </body>
         </html>
       `,
