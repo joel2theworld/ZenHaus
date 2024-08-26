@@ -1,27 +1,31 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Landing from "../../assets/ZH.png";
 import Logo from "../../assets/zhlogo.png";
-import "../../styles/Login.css";
+import "../../styles/SignUp.css";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const Login = () => {
+const ResetPassword = () => {
   const navigate = useNavigate();
-  // State for form inputs
-  const [email, setEmail] = useState("");
+  const { token } = useParams(); // Extract the token from the URL
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const validateForm = () => {
     const newErrors = {};
-    if (!email) newErrors.email = "Email is required.";
-    if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Email is invalid.";
     if (!password) newErrors.password = "Password is required.";
-    
+    if (password.length < 6)
+      newErrors.password = "Password must be at least 6 characters.";
+    if (password !== confirmPassword)
+      newErrors.confirmPassword = "Passwords do not match.";
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0; // Returns true if no errors
   };
@@ -32,21 +36,18 @@ const Login = () => {
     if (!validateForm()) {
       return; // If validation fails, stop submission
     }
-
     try {
-      const response = await axios.post("http://localhost:5001/auth/login", {
-        email,
-        password,
-      });
-
+      const response = await axios.post(
+        `http://localhost:5001/auth/reset/${token}`,
+        { password }
+      );
       // Handle success
-      toast.success("Login successful! Redirecting...");
+      toast.success("Password changed successfully! Redirecting...");
       // Redirect logic can be added here if using react-router
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/login");
       }, 3000); //3seconds
     } catch (error) {
-      // Handle error
       if (error.response && error.response.data) {
         toast.error(error.response.data.msg || "An error occurred.");
       } else {
@@ -54,7 +55,6 @@ const Login = () => {
       }
     }
   };
-
   return (
     <div>
       <ToastContainer />
@@ -75,27 +75,10 @@ const Login = () => {
                   />
                   <h1 className="logo-text">ZenHaus</h1>
                 </div>
-                <h2 className="form-title">Log In</h2>
-                <div className="email-input">
-                  <label htmlFor="email" className="input-label">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="email-field"
-                    placeholder="example.email@gmail.com"
-                    aria-label="Email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  {errors.email && (
-                    <p className="error-message">{errors.email}</p>
-                  )}
-                </div>
+                <h2 className="form-title">Create New Password</h2>
                 <div className="password-input">
                   <label htmlFor="password" className="input-label">
-                    Password
+                    New Password
                   </label>
                   <div className="password-field">
                     <input
@@ -117,16 +100,36 @@ const Login = () => {
                     )}
                   </div>
                 </div>
+
+                <div className="password-input">
+                  <label htmlFor="confirmPassword" className="input-label">
+                    Confirm New Password
+                  </label>
+                  <div className="password-field">
+                    <input
+                      type={showConfirmPassword ? "text" : "password"}
+                      id="confirmPassword"
+                      placeholder="Enter at least 6+ characters"
+                      aria-label="Confirm password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                    <span
+                      className="toggle-password"
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                    >
+                      {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                    {errors.confirmPassword && (
+                      <p className="error-message">{errors.confirmPassword}</p>
+                    )}
+                  </div>
+                </div>
                 <button type="submit" className="submit-button">
-                  Log In
+                  Change Password
                 </button>
-                <p className="login-link">
-                  Don't have an account?{" "}
-                  <a href="/signup" >
-                    Sign Up
-                  </a>
-                  <p><a href="/forgot-password">Forgot Password</a></p>
-                </p>
               </div>
             </form>
           </div>
@@ -136,4 +139,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResetPassword;
