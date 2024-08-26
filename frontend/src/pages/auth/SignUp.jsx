@@ -67,7 +67,7 @@ const SignUp = () => {
       });
 
       // Handle success
-      toast.success("Signup successful! Please proceed to login.");
+      toast.success("Signup successful! Please check your email.");
       setTimeout(() => {
         navigate("/login");
       }, 3000); //3seconds

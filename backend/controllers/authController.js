@@ -161,7 +161,7 @@ export const forgotPasswordHandler = async (req, res) => {
               <p>If you did not request a password reset, please ignore this email and your password will remain unchanged.</p>
               <br>
               <p>Best Regards,<br>
-              The ZenHausser Team</p>
+              The ZenHaus Team</p>
             </body>
           </html>
         `,
