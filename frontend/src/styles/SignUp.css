@@ -60,7 +60,6 @@
 .register-form {
   border-radius: 4px;
   background-color: #fff;
-  box-shadow: 0 0 2px rgba(23, 26, 31, 0.12);
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -237,6 +236,7 @@
 }
 
 .password-field {
+  position: relative;
   border-radius: 4px;
   background-color: #f3f4f6;
   display: flex;
@@ -374,4 +374,12 @@ input[type="checkbox"]:checked + .checkbox::after {
   color: red;
   font-size: 12px;
   margin-top: 5px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }

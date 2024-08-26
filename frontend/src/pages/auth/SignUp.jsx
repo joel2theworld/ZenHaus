@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../styles/SignUp.css";
 import Landing from "../../assets/ZH.png";
 import Logo from "../../assets/zhlogo.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -18,7 +19,8 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   // Validation states
   const [errors, setErrors] = useState({});
 
@@ -30,8 +32,10 @@ const SignUp = () => {
     if (!email) newErrors.email = "Email is required.";
     if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Email is invalid.";
     if (!password) newErrors.password = "Password is required.";
-    if (password.length < 6) newErrors.password = "Password must be at least 6 characters.";
-    if (password !== confirmPassword) newErrors.confirmPassword = "Passwords do not match.";
+    if (password.length < 6)
+      newErrors.password = "Password must be at least 6 characters.";
+    if (password !== confirmPassword)
+      newErrors.confirmPassword = "Passwords do not match.";
     if (!termsAccepted) newErrors.termsAccepted = "You must accept the terms.";
 
     setErrors(newErrors);
@@ -117,7 +121,9 @@ const SignUp = () => {
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                     />
-                    {errors.firstName && <p className="error-message">{errors.firstName}</p>}
+                    {errors.firstName && (
+                      <p className="error-message">{errors.firstName}</p>
+                    )}
                   </div>
                   <div className="input-group">
                     <label htmlFor="lastName" className="input-label">
@@ -132,7 +138,9 @@ const SignUp = () => {
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                     />
-                    {errors.lastName && <p className="error-message">{errors.lastName}</p>}
+                    {errors.lastName && (
+                      <p className="error-message">{errors.lastName}</p>
+                    )}
                   </div>
                 </div>
                 <div className="phone-input">
@@ -148,7 +156,9 @@ const SignUp = () => {
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                   />
-                  {errors.phoneNumber && <p className="error-message">{errors.phoneNumber}</p>}
+                  {errors.phoneNumber && (
+                    <p className="error-message">{errors.phoneNumber}</p>
+                  )}
                 </div>
                 <div className="email-input">
                   <label htmlFor="email" className="input-label">
@@ -163,7 +173,9 @@ const SignUp = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
-                  {errors.email && <p className="error-message">{errors.email}</p>}
+                  {errors.email && (
+                    <p className="error-message">{errors.email}</p>
+                  )}
                 </div>
                 <div className="password-input">
                   <label htmlFor="password" className="input-label">
@@ -171,30 +183,49 @@ const SignUp = () => {
                   </label>
                   <div className="password-field">
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       id="password"
                       placeholder="Enter at least 6+ characters"
                       aria-label="Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
-                    {errors.password && <p className="error-message">{errors.password}</p>}
+                    <span
+                      className="toggle-password"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                    {errors.password && (
+                      <p className="error-message">{errors.password}</p>
+                    )}
                   </div>
                 </div>
+
                 <div className="password-input">
                   <label htmlFor="confirmPassword" className="input-label">
                     Confirm Password
                   </label>
                   <div className="password-field">
                     <input
-                      type="password"
+                      type={showConfirmPassword ? "text" : "password"}
                       id="confirmPassword"
-                      placeholder="Enter at least 8+ characters"
+                      placeholder="Enter at least 6+ characters"
                       aria-label="Confirm password"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-                    {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
+                    <span
+                      className="toggle-password"
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                    >
+                      {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                    {errors.confirmPassword && (
+                      <p className="error-message">{errors.confirmPassword}</p>
+                    )}
                   </div>
                 </div>
                 <div className="terms-checkbox">
@@ -208,17 +239,20 @@ const SignUp = () => {
                     />
                     <label htmlFor="termsCheckbox" className="checkbox"></label>
                     <span className="terms-text">
-                      By signing up, I agree with the Terms of Use & Privacy Policy
+                      By signing up, I agree with the Terms of Use & Privacy
+                      Policy
                     </span>
                   </div>
-                  {errors.termsAccepted && <p className="error-message">{errors.termsAccepted}</p>}
+                  {errors.termsAccepted && (
+                    <p className="error-message">{errors.termsAccepted}</p>
+                  )}
                 </div>
                 <button type="submit" className="submit-button">
                   Create an account
                 </button>
                 <p className="login-link">
                   Already have an account?{" "}
-                  <a href="#" style={{ color: "#4a1ca6" }}>
+                  <a href="/login" style={{ color: "#4a1ca6" }}>
                     Log in
                   </a>
                 </p>

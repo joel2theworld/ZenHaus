@@ -1,0 +1,218 @@
+.login-container {
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(18, 15, 40, 0.12);
+    overflow: hidden;
+  }
+  
+  .login-content {
+    display: flex;
+  }
+  
+  @media (max-width: 991px) {
+    .login-content {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+  }
+  
+  .login-image {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 50%;
+    margin-left: 0;
+  }
+  
+  @media (max-width: 991px) {
+    .login-image {
+      width: 100%;
+    }
+  }
+  
+  .login-image img {
+    aspect-ratio: 0.82;
+    object-fit: cover; /* Changed to cover for better background appearance */
+    width: 100%;
+  }
+  
+  .login-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+  
+  @media (max-width: 991px) {
+    .login-form-container {
+      width: 100%;
+    }
+  }
+  
+  .login-form {
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 0 2px rgba(23, 26, 31, 0.12);
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 36px 80px 95px; /* Adjusted padding for better spacing */
+    font: 18px Inter, sans-serif;
+  }
+  
+  .logo-container {
+    align-self: center;
+    display: flex;
+    width: 145px;
+    max-width: 100%;
+    gap: 10px;
+    color: #000;
+    white-space: nowrap;
+    font: 400 28px Arizonia, sans-serif;
+  }
+  
+  .logo-image {
+    aspect-ratio: 1;
+    object-fit: contain;
+    width: 36px;
+    margin: auto 0;
+  }
+  
+  .logo-text {
+    transform: rotate(0deg); /* Removed unnecessary rotation */
+  }
+  
+  .login-header {
+    display: flex;
+    margin-top: 23px; /* Adjusted margin for better spacing */
+    width: 100%;
+    gap: 20px;
+    font-family: Epilogue, sans-serif;
+    font-weight: 400;
+    justify-content: space-between;
+  }
+  
+  .login-title {
+    color: #20274d;
+    font-size: 32px;
+  }
+  
+  .signup-link {
+    color: #171a1f;
+    font-size: 14px;
+    line-height: 2;
+    text-align: center;
+    margin: auto 0;
+  }
+  
+  .signup-link span {
+    color: #4a1ca6;
+    cursor: pointer; /* Added pointer cursor for better UX */
+  }
+  
+  .input-group {
+    background-color: transparent;
+    display: flex;
+    margin-top: 20px; /* Adjusted margin for better spacing */
+    flex-direction: column;
+    font-size: 18px;
+    line-height: 2;
+  }
+  
+  .input-label {
+    color: #424955;
+    font-weight: 700;
+    align-self: start;
+  }
+  
+  .input-field {
+    border: none;
+    border-radius: 4px;
+    background-color: #f3f4f6;
+    color: #424955; /* Changed color for better visibility */
+    font-weight: 400;
+    padding: 12px 20px;
+    width: 100%;
+  }
+  
+  .password-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .password-toggle {
+    aspect-ratio: 1;
+    object-fit: contain;
+    width: 24px;
+    cursor: pointer; /* Added pointer cursor for better UX */
+  }
+  
+  .login-button {
+    border-radius: 4px;
+    background-color: #1e264c;
+    margin-top: 30px; /* Adjusted margin for better spacing */
+    font-size: 18px;
+    color: #fff;
+    font-weight: 400;
+    line-height: 2;
+    padding: 12px 70px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Added transition for hover effect */
+  }
+  
+  .login-button:hover {
+    background-color: #4a1ca6; /* Change color on hover */
+  }
+  
+  .forgot-password {
+    color: #1c49d0;
+    text-align: center;
+    align-self: center;
+    margin-top: 18px;
+    font: 400 18px/2 Epilogue, sans-serif;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  @media (max-width: 991px) {
+    .login-content {
+      flex-direction: column;
+    }
+    .login-image,
+    .login-form-container {
+      width: 100%;
+    }
+    .login-form {
+      padding: 40px 20px; /* Adjusted padding for mobile view */
+    }
+    .login-header {
+      margin-top: 20px; /* Adjusted margin for mobile view */
+    }
+    .input-group,
+    .login-button {
+      max-width: 100%;
+    }
+    .login-button {
+      margin-top: 20px; /* Adjusted margin for mobile view */
+      padding: 12px 20px; /* Adjusted padding for mobile view */
+    }
+  }
