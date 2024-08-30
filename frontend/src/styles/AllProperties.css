@@ -1,0 +1,38 @@
+.props-page{
+    display: flex;
+}
+.props-content{
+    width: 80%;
+    padding: 20px;
+}
+.properties-table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to the table */
+    border-radius: 5px; /* Rounded corners */
+    overflow: hidden; /* Hide overflow for rounded corners */
+}
+
+.properties-table th,
+.properties-table td {
+    padding: 15px 20px; /* Increase padding for more space */
+    text-align: center; /* Center align the text */
+    vertical-align: middle; /* Vertically align the text */
+}
+
+.properties-table thead th {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text for contrast */
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+.properties-table tbody tr {
+    background-color: #f9f9f9; /* Light grey for rows */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.properties-table tbody tr:hover {
+    background-color: #e2e6ea; /* Darker grey on hover */
+}

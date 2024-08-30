@@ -38,7 +38,10 @@ const Login = () => {
         email,
         password,
       });
-
+      const token = response.data.token;
+      const userId = response.data.userId;
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', userId);
       // Handle success
       toast.success("Login successful! Redirecting...");
       // Redirect logic can be added here if using react-router

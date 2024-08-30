@@ -7,42 +7,31 @@ const propertySchema = new Schema ({
         type: String,
         required: true
     },
-    location : {
+    address : {
         type: String,
         required: true
     },
     price : {
-        type: Number,
+        type: String,
         required: true
     },
     status:{
         type: String,
-        enum: ['available', 'unavailable']
+        enum: ['Available', 'Unavailable']
     },
-    category : {
+    listingType : {
         type: String,
-        enum: ['sale', 'rental', 'shortlet']
+        enum: ['Sale', 'Rental']
     },
     description: {
         type: String,
         required: true
     },
-    image1: {
-        type: String,
-        default: 'image'
+    images: {
+        type: [String],
+        default: []
     },
-    image2: {
-        type: String,
-        default: 'image'
-    },
-    image3: {
-        type: String,
-        default: 'image'
-    },
-    image4: {
-        type: String,
-        default: 'image'
-    },
+    
     city: {
         type: String,
         required: true
@@ -50,10 +39,6 @@ const propertySchema = new Schema ({
     state: {
         type: String,
         required: true
-    },
-    document: {
-        type: String,
-        default: 'document'
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

@@ -15,11 +15,14 @@ const CreateProperty = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
-  const [city, setCity] = useState("Abuja");
-  const [state, setState] = useState("FCT");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [images, setImages] = useState([]);
 
   // Validation states
   const [errors, setErrors] = useState({});
+
+  const listingTypes = ["Sale", "Rental"];
 
   const validateForm = () => {
     const newErrors = {};
@@ -27,8 +30,22 @@ const CreateProperty = () => {
     if (!price) newErrors.price = "Price is required.";
     if (!description) newErrors.description = "Description is required.";
     if (!address) newErrors.address = "Address is required.";
+    if (!city) newErrors.city = "City is required.";
+    if (!state) newErrors.state = "State is required.";
+    if (images.length === 0) newErrors.images = "At least one image is required.";
+    if (images.length > 4) newErrors.images = "You can upload a maximum of 4 images.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0; // Returns true if no errors
+  };
+
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length > 4) {
+      setErrors(prevErrors => ({ ...prevErrors, images: "You can upload a maximum of 4 images." }));
+      return;
+    }
+    setErrors(prevErrors => ({ ...prevErrors, images: null }));
+    setImages(files);
   };
 
   const handleSubmit = async (event) => {
@@ -37,21 +54,30 @@ const CreateProperty = () => {
       return; // If validation fails, stop submission
     }
 
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("listingType", listingType);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("address", address);
+    formData.append("city", city);
+    formData.append("state", state);
+    images.forEach((image) => {
+      formData.append("images", image); // Append each image to the 'images' array
+    });
+
+    const token = localStorage.getItem('token');
+
     try {
-      const response = await axios.post(
-        "http://localhost:5001/property/create",
-        {
-          name,
-          listingType,
-          price,
-          description,
-          address,
-          city,
-          state,
-        }
-      );
+      const response = await axios.post("http://localhost:5001/property/create", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+      // Handle success
       toast.success("Property created successfully!");
-      navigate("/properties"); // Redirect to properties page or another relevant page
+      navigate("/properties");
     } catch (error) {
       if (error.response && error.response.data) {
         toast.error(error.response.data.msg || "An error occurred.");
@@ -84,6 +110,7 @@ const CreateProperty = () => {
               type="text"
               id="property-name"
               className="form-input"
+              placeholder="Grey Homes"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -92,22 +119,25 @@ const CreateProperty = () => {
 
           <div className="form-group">
             <label htmlFor="listing-type" className="form-label">
-              Listing type
+              Listing Type
             </label>
-            <div className="form-input dropdown-input">
-              <span>{listingType}</span>
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/a1389849e9c5820bbe5f838bef78fd9459f8fb2846d631515f45b87df0e7430d?placeholderIfAbsent=true&apiKey=65b3ada40e564124a193992cddc527e9"
-                className="dropdown-icon"
-                alt=""
-              />
-            </div>
+            <select
+              id="listing-type"
+              className="form-input"
+              value={listingType}
+              onChange={(e) => setListingType(e.target.value)}
+            >
+              {listingTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">
             <label htmlFor="price" className="form-label">
-              Price
+              Price (₦)
             </label>
             <input
               type="text"
@@ -115,6 +145,7 @@ const CreateProperty = () => {
               className="form-input"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              placeholder="150,000"
             />
             {errors.price && <p className="error-message">{errors.price}</p>}
           </div>
@@ -128,6 +159,7 @@ const CreateProperty = () => {
               className="form-input description-input"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              placeholder="A spacious 3-bedroom apartment in the heart of town."
             ></textarea>
             {errors.description && (
               <p className="error-message">{errors.description}</p>
@@ -142,6 +174,7 @@ const CreateProperty = () => {
               type="text"
               id="address"
               className="form-input address-input"
+              placeholder="7, Ozuma Mbadiwe Avenue"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
@@ -155,31 +188,43 @@ const CreateProperty = () => {
               <label htmlFor="city" className="form-label">
                 City
               </label>
-              <div className="form-input dropdown-input">
-                <span>{city}</span>
-                <img
-                  loading="lazy"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/a1389849e9c5820bbe5f838bef78fd9459f8fb2846d631515f45b87df0e7430d?placeholderIfAbsent=true&apiKey=65b3ada40e564124a193992cddc527e9"
-                  className="dropdown-icon"
-                  alt=""
-                />
-              </div>
+              <input
+                type="text"
+                id="city"
+                placeholder="Ikeja"
+                className="form-input address-input"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
             </div>
 
             <div className="form-group city-state-group">
               <label htmlFor="state" className="form-label">
                 State/Province
               </label>
-              <div className="form-input dropdown-input">
-                <span>{state}</span>
-                <img
-                  loading="lazy"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/a1389849e9c5820bbe5f838bef78fd9459f8fb2846d631515f45b87df0e7430d?placeholderIfAbsent=true&apiKey=65b3ada40e564124a193992cddc527e9"
-                  className="dropdown-icon"
-                  alt=""
-                />
-              </div>
+              <input
+                type="text"
+                id="state"
+                placeholder="Lagos"
+                className="form-input address-input"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+              />
             </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="images" className="form-label">
+              Upload Images (max 4, at least 1 required)
+            </label>
+            <input
+              type="file"
+              id="images"
+              className="form-input"
+              multiple
+              onChange={handleImageChange}
+            />
+            {errors.images && <p className="error-message">{errors.images}</p>}
           </div>
 
           <button type="submit" className="continue-button">

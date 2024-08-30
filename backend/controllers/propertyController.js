@@ -1,9 +1,10 @@
+
 import { Property } from "../models/Property.js";
 import { User } from '../models/User.js';
 
 //create property
 export const createProperty = async (req,res) => {
-    const {name, location, description, price, image1, image2, image3, image4, city, state, category, document} = req.body;
+    const {name, address, description, price, images, city, state, listingType} = req.body;
     try {
         const userId = req.user.id;
 
@@ -13,17 +14,14 @@ export const createProperty = async (req,res) => {
         }
         const property = new Property({
             name,
-            location,
+            address,
             description,
             price,
-            category,
+            listingType,
             city,
-            image1,
-            image2,
-            image3,
-            image4,
-            document,
+            images,
             state,
+            status: 'Available',
             user: user._id
         });
 

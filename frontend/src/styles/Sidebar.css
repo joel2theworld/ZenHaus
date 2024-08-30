@@ -7,6 +7,7 @@
   font-weight: 400;
   /* margin: 0 auto; */
   padding: 16px 16px 552px;
+  
 }
 @media (max-width: 991px) {
   .sidebar {
@@ -32,8 +33,7 @@
   aspect-ratio: 1;
   object-fit: contain;
   object-position: center;
-  width: 36px;
-  margin: auto 0;
+  width: 24px;
 }
 .zen-hausser {
   transform: rotate(2.4492937051703357e-16rad);
@@ -49,16 +49,19 @@
 }
 .frame {
   border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0);
   display: flex;
+  margin-top: 17px;
   gap: 8px;
   overflow: hidden;
-  white-space: nowrap;
+  color: #565E6C;
+  font-weight: 400;
   padding: 8px 16px;
+  text-decoration: none;
 }
 @media (max-width: 991px) {
   .frame {
     white-space: initial;
+    text-decoration: none;
   }
 }
 .img-2 {
@@ -73,14 +76,14 @@
 }
 .frame-2 {
   border-radius: 4px;
-  background-color: rgba(241, 244, 253, 1);
   display: flex;
   margin-top: 17px;
   gap: 8px;
   overflow: hidden;
-  color: rgba(15, 39, 112, 1);
-  font-weight: 700;
+  color: #565E6C;
+  font-weight: 400;
   padding: 8px 16px;
+  text-decoration: none;
 }
 .img-3 {
   aspect-ratio: 1;
@@ -94,13 +97,14 @@
 }
 .frame-3 {
   border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0);
   display: flex;
   margin-top: 17px;
   gap: 8px;
   overflow: hidden;
-  white-space: nowrap;
+  color: #565E6C;
+  font-weight: 400;
   padding: 8px 16px;
+  text-decoration: none;
 }
 @media (max-width: 991px) {
   .frame-3 {
@@ -119,13 +123,14 @@
 }
 .frame-4 {
   border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0);
   display: flex;
   margin-top: 17px;
   gap: 8px;
   overflow: hidden;
-  white-space: nowrap;
+  color: #565E6C;
+  font-weight: 400;
   padding: 8px 16px;
+  text-decoration: none;
 }
 @media (max-width: 991px) {
   .frame-4 {
@@ -144,12 +149,14 @@
 }
 .frame-5 {
   border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0);
   display: flex;
   margin-top: 17px;
   gap: 8px;
   overflow: hidden;
+  color: #565E6C;
+  font-weight: 400;
   padding: 8px 16px;
+  text-decoration: none;
 }
 .img-6 {
   aspect-ratio: 1;
@@ -160,4 +167,13 @@
 .create-listing {
   flex-grow: 1;
   width: 187px;
+}
+.frame.active,
+.frame-2.active,
+.frame-3.active,
+.frame-4.active,
+.frame-5.active {
+  background-color: rgb(195, 207, 243); /* Highlight color */
+  font-weight: 700;
+  color: rgb(11, 23, 61); /* Text color for active state */
 }
