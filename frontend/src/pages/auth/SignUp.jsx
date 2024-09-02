@@ -116,7 +116,7 @@ const SignUp = () => {
                       type="text"
                       id="firstName"
                       className="input-field"
-                      placeholder="Input first name"
+                      placeholder="Vito"
                       aria-label="First name"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
@@ -133,7 +133,7 @@ const SignUp = () => {
                       type="text"
                       id="lastName"
                       className="input-field"
-                      placeholder="Input last name"
+                      placeholder="Corleone"
                       aria-label="Last name"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}

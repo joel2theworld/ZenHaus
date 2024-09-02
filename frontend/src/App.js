@@ -7,6 +7,8 @@ import ForgotPassword from './pages/auth/ForgotPassword.jsx';
 import ResetPassword from './pages/auth/ResetPassword.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import CreateProperty from './pages/Dashboard/CreateProperty.jsx';
+import AllProperties from './pages/Dashboard/AllProperties.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   return (
@@ -19,6 +21,7 @@ const App = () => {
       <Route path='/reset/:token' element={<ResetPassword/>}/>
       <Route path='/dashboard' element={<Dashboard/>}/>
       <Route path='/create-property' element={<CreateProperty/>}/>
+      <Route path='/properties' element={<AllProperties/>}/>
     </Routes>
     </Router>
   )
