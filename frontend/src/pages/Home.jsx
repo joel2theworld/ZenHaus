@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import '../styles/Home.css';
+import Explore from "./Links/Explore";
 
 const Home = () => {
   return (
@@ -34,6 +35,9 @@ const Home = () => {
               />
             </div>
           </div>
+        </section>
+        <section className="feature-section">
+          <Explore/>
         </section>
       </div>
     </div>

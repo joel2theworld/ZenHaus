@@ -1,10 +1,10 @@
-
 import { Property } from "../models/Property.js";
 import { User } from '../models/User.js';
+import { cloudinary } from "../config/cloudinaryConfig.js";
 
-//create property
-export const createProperty = async (req,res) => {
-    const {name, address, description, price, images, city, state, listingType} = req.body;
+export const createProperty = async (req, res) => {
+    const { name, address, description, price, city, state, listingType } = req.body;
+
     try {
         const userId = req.user.id;
 
@@ -12,6 +12,18 @@ export const createProperty = async (req,res) => {
         if (!user) {
             return res.status(400).json({ msg: 'User not found' });
         }
+
+        // Check if the 'images' field exists in req.files
+        const imageFiles = req.files?.images || [];
+        const imageUploads = imageFiles.map(file => cloudinary.uploader.upload(file.path, {
+            use_filename: true,
+        }));
+
+        // Wait for all image uploads to complete
+        const imageUrls = await Promise.all(imageUploads);
+        console.log('Cloudinary upload results:', imageUrls);
+
+        // Create the property with the uploaded images
         const property = new Property({
             name,
             address,
@@ -19,10 +31,10 @@ export const createProperty = async (req,res) => {
             price,
             listingType,
             city,
-            images,
+            images: imageUrls.map(upload => upload.secure_url), // Store only the URL of each image
             state,
             status: 'Available',
-            user: user._id
+            user: user._id,
         });
 
         await property.save();
@@ -30,12 +42,14 @@ export const createProperty = async (req,res) => {
         // Add the property to the user's list of properties
         user.properties.push(property._id);
         await user.save();
+
         res.status(200).send('Property created successfully');
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
     }
 };
+
 
 // Update property by ID
 export const updateProperty = async (req, res) => {
@@ -143,7 +157,7 @@ export const getUserByPropertyId = async (req, res) => {
 };
 
 // Get All Properties by User ID
-export const getAllProperties = async (req, res) => {
+export const getAllPropertiesByUser = async (req, res) => {
     const { userId } = req.params;
 
     try {
@@ -161,3 +175,20 @@ export const getAllProperties = async (req, res) => {
     }
 };
 
+//Get All Properties
+export const getAllProperties = async (req, res) => {
+
+    try {
+        // Find all properties for the given user
+        const properties = await Property.find();
+
+        // If no properties are found, return an empty array or a message
+        if (!properties.length) {
+            return res.status(404).json({ msg: 'No properties found for this user' });
+        }
+        res.status(200).json(properties);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+};

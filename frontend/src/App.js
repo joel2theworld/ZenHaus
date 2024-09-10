@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import CreateProperty from './pages/Dashboard/CreateProperty.jsx';
 import AllProperties from './pages/Dashboard/AllProperties.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Explore from './pages/Links/Explore.jsx';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
       <Route path='/dashboard' element={<Dashboard/>}/>
       <Route path='/create-property' element={<CreateProperty/>}/>
       <Route path='/properties' element={<AllProperties/>}/>
+      <Route path='/explore' element={<Explore/>}/>
     </Routes>
     </Router>
   )
