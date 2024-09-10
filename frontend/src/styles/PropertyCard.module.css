@@ -1,0 +1,113 @@
+.card {
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0 0 2px rgba(23, 26, 31, 0.12);
+    display: flex;
+    flex-grow: 1;
+    padding-bottom: 18px;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    width: 100%;
+  }
+  @media (max-width: 991px) {
+    .card {
+      margin-top: 40px;
+    }
+  }
+  .propertyImage {
+    aspect-ratio: 1.8;
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+  }
+  .cardContent {
+    display: flex;
+    margin-top: 12px;
+    width: 100%;
+    flex-direction: column;
+    padding: 0 14px;
+  }
+  .headerSection {
+    display: flex;
+    gap: 20px;
+    font-weight: 700;
+    justify-content: space-between;
+  }
+  .titleWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .location {
+    color: #4069e5;
+    font-size: 11px;
+    line-height: 2;
+    align-self: start;
+  }
+  .propertyTitle {
+    color: #323842;
+    font-size: 16px;
+    line-height: 2;
+  }
+  .price {
+    color: #1638a0;
+    font-size: 12px;
+    line-height: 2;
+    align-self: start;
+  }
+  .description {
+    color: #9095a0;
+    font-size: 12px;
+    line-height: 20px;
+    align-self: start;
+  }
+  .footerSection {
+    display: flex;
+    margin-top: 11px;
+    width: 100%;
+    gap: 20px;
+    font-size: 12px;
+    line-height: 2;
+    justify-content: space-between;
+  }
+  .tag {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    color: #117b34;
+    white-space: nowrap;
+    margin: auto 0;
+  }
+  @media (max-width: 991px) {
+    .tag {
+      white-space: initial;
+    }
+  }
+  .tagContent {
+    border-radius: 11px;
+    background-color: #eefdf3;
+    overflow: hidden;
+    padding: 1px 8px;
+  }
+  @media (max-width: 991px) {
+    .tagContent {
+      white-space: initial;
+    }
+  }
+  .actionWrapper {
+    display: flex;
+    gap: 16px;
+  }
+  .viewDetails {
+    color: #4069e5;
+    flex-grow: 1;
+  }
+  .contactButton {
+    border-radius: 4px;
+    background-color: #1638a0;
+    overflow: hidden;
+    color: #fff;
+    padding: 4px 12px;
+  }
