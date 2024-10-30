@@ -50,7 +50,6 @@ export const createProperty = async (req, res) => {
     }
 };
 
-
 // Update property by ID
 export const updateProperty = async (req, res) => {
     const { propertyId } = req.params;
@@ -175,20 +174,22 @@ export const getAllPropertiesByUser = async (req, res) => {
     }
 };
 
-//Get All Properties
+// Get All Properties
 export const getAllProperties = async (req, res) => {
-
     try {
-        // Find all properties for the given user
+        // Find all properties in the database
         const properties = await Property.find();
 
         // If no properties are found, return an empty array or a message
         if (!properties.length) {
-            return res.status(404).json({ msg: 'No properties found for this user' });
+            return res.status(404).json({ msg: 'No properties found' });
         }
+
+        // Respond with all found properties
         res.status(200).json(properties);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
     }
 };
+

@@ -1,11 +1,12 @@
 import React from 'react'
-import PropertyListing from '../../components/PropertyListing'
+import PropertyList from '../../components/PropertyList.jsx'
+import Header from '../../components/Header.jsx'
 
 const Explore = () => {
   return (
     <div>
-        Yeah
-      <PropertyListing/>
+      <Header/>
+      <PropertyList/>
     </div>
   )
 }

@@ -11,6 +11,9 @@ import Help from "../assets/C question.png";
 const Sidebar = () => {
   const location = useLocation(); // Get current location
   const currentPath = location.pathname; // Get the current path
+  const logoutHandler = async (event) => {
+    
+  };
 
   return (
     <div className="sidebar">
@@ -62,6 +65,9 @@ const Sidebar = () => {
             className="img-6"
           />
           <div className="create-listing">Create Listing</div>
+        </Link>
+        <Link>
+        <button></button>
         </Link>
       </div>
     </div>
