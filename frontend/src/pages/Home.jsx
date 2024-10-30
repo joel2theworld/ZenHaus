@@ -36,7 +36,10 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <section className="feature-section">
+        
+      </div>
+      <div className="collection-section">
+      <section className="feature-section">
           <Explore/>
         </section>
       </div>

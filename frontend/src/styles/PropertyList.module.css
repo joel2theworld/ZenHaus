@@ -1,0 +1,21 @@
+.propertyList {
+  margin-top: 46px;
+}
+
+.listingsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 2rem; /* Gap between the cards */
+  padding: 3rem;
+}
+
+@media (max-width: 991px) {
+  .propertyList {
+    margin: 40px 9px 0 0;
+  }
+
+  .listingsContainer {
+    grid-template-columns: 1fr; /* Single column for small screens */
+    gap: 2rem;
+  }
+}
